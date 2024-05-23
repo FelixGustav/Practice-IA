@@ -2,7 +2,7 @@
 import pandas as pd
 from sklearn.naive_bayes import GaussianNB
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.metrics import mean_squared_error
 
 # Carregar o dataset
 df = pd.read_csv("ConsumoCo2.csv")
@@ -25,8 +25,5 @@ y_pred_nb = nb_model.predict(x_test)
 
 # Avaliar o desempenho do modelo
 mae = mean_squared_error(y_test, y_pred_nb)
-r2 = r2_score(y_test, y_pred_nb)
-
-
 print("Mean Squared Error:", mae)
-print("R² Score:", r2)
+
