@@ -3,13 +3,13 @@ import matplotlib.pyplot as plt
 from sklearn.datasets import load_digits
 from sklearn.model_selection import train_test_split
 
-# Carregar e preparar os dados
+# carregar e prepara os dados
 digits = load_digits()
 x = digits.data / 16.0
 y = digits.target
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=42)
 
-# Definição do Perceptron
+# perceptron
 class perceptronSigmoid:
     def __init__(self, input_size, output_size, learning_rate=0.1):
         self.weights = np.random.randn(output_size, input_size) * 0.01
@@ -33,7 +33,7 @@ class perceptronSigmoid:
             for xi, target in zip(x, y_encoded):
                 pred = self.predict(xi)
                 error = target - pred
-                delta = self.lr * error * self.sigmoid_derivative(pred)
+                delta = self.lr * error * self.sigmoid_derivada(pred)
                 self.weights += np.outer(delta, xi)
                 self.bias += delta
 
@@ -41,18 +41,18 @@ class perceptronSigmoid:
         preds = np.argmax(self.predict(x), axis=1)
         return np.mean(preds == y)
 
-# Inicializar e treinar o Perceptron
+# treinar o Perceptron
 input_size = x_train.shape[1]
 output_size = 10
 perceptron = perceptronSigmoid(input_size, output_size, learning_rate=0.1)
 perceptron.train(x_train, y_train, epochs=1000)
 
-# Avaliar a acurácia do modelo no conjunto de teste
+# avaliar a acurácia do modelo no conjunto de teste
 accuracy = perceptron.accuracy(x_test, y_test)
-print(f"Acurácia do Perceptron: {accuracy * 100:.2f}%")
+print(f"Acuracia do Perceptron: {accuracy * 100:.2f}%")
 
-# Visualizar os pesos de um dos dígitos
-plt.imshow(perceptron.weights[0].reshape(8, 8), cmap='viridis')
+# visualizar os pesos de um dos dígitos
+plt.imshow(perceptron.weights[0].reshape(8, 8), cmap='plasma')
 plt.colorbar()
-plt.title("Visualização dos Pesos do Perceptron para o Dígito 0")
 plt.show()
+
