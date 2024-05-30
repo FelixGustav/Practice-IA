@@ -16,7 +16,7 @@ class perceptronSigmoid:
         self.bias = np.zeros(output_size)
         self.lr = learning_rate
 
-    def sigmoid(self, z):
+    def sigmoid(self, z  ):
         return 1 / (1 + np.exp(-z))
 
 
